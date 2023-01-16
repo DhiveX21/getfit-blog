@@ -1,12 +1,10 @@
 import Head from "next/head";
-import Footer from "../components/Footer";
 import PostCard from "../components/PostCard";
 import { client } from "../lib/apollo";
 import { gql } from "@apollo/client";
 import PreviewPanel from "../components/PreviewPanel";
 
 export default function Home({ posts }) {
-  console.log(posts);
   return (
     <div>
       <Head>
@@ -15,14 +13,22 @@ export default function Home({ posts }) {
       </Head>
 
       <main>
-        <div className="blog-banner w-full bg-[#F6F7FB]">
+        <div
+          className="blog-banner w-full bg-[#F6F7FB] mt-[30px]"
+          style={{
+            backgroundImage: "url(/images/banner_index.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div
-            className="blog-banner__wrapper min-h-[600px] flex justify-center items-center
-           relative md:min-h-[300px]"
+            className="blog-banner__wrapper min-h-[300px] flex justify-center items-center
+           relative md:min-h-[600px]"
           >
             <div>
-              <h1 className="blog-banner__title text-[#77C6A6] text-[60px]">
-                Get Fisio Blogs
+              <h1 className="blog-banner__title text-white text-[60px] font-bold ">
+                Blogs
               </h1>
             </div>
           </div>
@@ -31,14 +37,21 @@ export default function Home({ posts }) {
           <PreviewPanel></PreviewPanel>
         </div>
 
-        <div className="flex flex-row flex-wrap w-2/3 py-[50px]">
+        <div className="w-full flex flex-wrap justify-between gap-[20px] p-[20px] md:p-[40px] lg:p-[100px]">
           {posts.map((post) => {
-            return <PostCard key={post.uri} post={post}></PostCard>;
+            return (
+              <PostCard
+                key={post.uri}
+                title={post.title}
+                category={post.categories.nodes}
+                thumbnail={post.featuredImage.node.sourceUrl}
+                date={post.date}
+                link={post.uri}
+              ></PostCard>
+            );
           })}
         </div>
       </main>
-
-      <Footer></Footer>
     </div>
   );
 }
@@ -52,6 +65,17 @@ export async function getStaticProps() {
           content
           uri
           date
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
         }
       }
     }
