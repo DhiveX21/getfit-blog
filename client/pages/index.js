@@ -37,7 +37,7 @@ export default function Home({ posts }) {
           <PreviewPanel></PreviewPanel>
         </div>
 
-        <div className="w-full flex flex-wrap justify-between gap-[20px] p-[20px] md:p-[40px] lg:p-[100px]">
+        <div className="w-full flex flex-wrap gap-[20px] p-[20px] md:p-[40px] lg:p-[100px]">
           {posts.map((post) => {
             return (
               <PostCard
@@ -88,5 +88,6 @@ export async function getStaticProps() {
     props: {
       posts,
     },
+    revalidate: 60,
   };
 }
