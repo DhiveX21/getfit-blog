@@ -22,7 +22,7 @@ export default function SlugPage({ post, allPosts }) {
         <div
           className="blog-banner w-full bg-[#F6F7FB] mt-[30px]"
           style={{
-            backgroundImage: `url('${post.featuredImage.node.sourceUrl}')`,
+            backgroundImage: `url('${post.featuredImage.node.sourceUrl ? post.featuredImage.node.sourceUrl : ""}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -74,7 +74,7 @@ export default function SlugPage({ post, allPosts }) {
                   key={post.uri}
                   title={post.title}
                   category={post.categories.nodes}
-                  thumbnail={post.featuredImage.node.sourceUrl}
+                  thumbnail={post.featuredImage.node.sourceUrl ? post.featuredImage.node.sourceUrl : ""}
                   date={post.date}
                   link={post.uri}
                 ></PostCard>
