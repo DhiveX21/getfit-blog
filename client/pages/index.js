@@ -44,7 +44,7 @@ export default function Home({ posts }) {
                 key={post.uri}
                 title={post.title}
                 category={post.categories.nodes}
-                thumbnail={post.featuredImage.node.sourceUrl}
+                thumbnail={post.featuredImage?.node.sourceUrl}
                 date={post.date}
                 link={post.uri}
               ></PostCard>
