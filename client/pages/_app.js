@@ -1,7 +1,7 @@
 import "../styles/index.css";
 // import "../styles/wordpress.css";
 import { client } from "../lib/apollo";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   return (
